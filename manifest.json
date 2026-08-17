@@ -1,0 +1,19 @@
+{
+  "name": "Teclado Fônico — O Som das Letras",
+  "short_name": "Teclado Fônico",
+  "description": "Teclado musical que fala o fonema (som) de cada letra, sílaba e palavra — para crianças da Educação Infantil e 1º ano.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#8ecbff",
+  "theme_color": "#4d96ff",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

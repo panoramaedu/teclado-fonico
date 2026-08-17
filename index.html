@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teclado Fônico 🔊 — O Som das Letras</title>
+<meta name="description" content="Teclado musical que fala o fonema (som) de cada letra — para crianças da Educação Infantil e 1º ano.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎹</text></svg>">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4d96ff">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- cenário -->
+<div class="sun" aria-hidden="true"><div class="sun-rays"></div><div class="sun-core"></div></div>
+<div class="cloud" style="top:7%;animation-duration:65s" aria-hidden="true"></div>
+<div class="cloud" style="top:16%;animation-duration:95s;animation-delay:-40s;scale:.7" aria-hidden="true"></div>
+<div class="cloud" style="top:3%;animation-duration:80s;animation-delay:-62s;scale:1.25" aria-hidden="true"></div>
+<span class="amb" style="left:6%;top:30%" aria-hidden="true">♪</span>
+<span class="amb" style="right:8%;top:44%;animation-delay:-4s" aria-hidden="true">♫</span>
+<span class="amb" style="left:12%;bottom:26%;animation-delay:-8s" aria-hidden="true">♬</span>
+<div class="hills" aria-hidden="true">
+  <span class="flower" style="left:8%">🌼</span>
+  <span class="flower" style="left:46%;animation-delay:-2s">🌷</span>
+  <span class="flower" style="right:9%;animation-delay:-1s">🌼</span>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="mascot" aria-hidden="true">🦜<span class="bubble">Aperte e repita o som!</span></div>
+    <div class="titles">
+      <h1 class="title" aria-label="Teclado Fônico">
+        <span style="--tc:#ff5d5d;--r:-3deg;--i:0">T</span><span style="--tc:#ff9f43;--r:2deg;--i:1">E</span><span style="--tc:#4dc06b;--r:-2deg;--i:2">C</span><span style="--tc:#4d96ff;--r:3deg;--i:3">L</span><span style="--tc:#b983ff;--r:-2deg;--i:4">A</span><span style="--tc:#ff7bac;--r:2deg;--i:5">D</span><span style="--tc:#ff9f43;--r:-3deg;--i:6">O</span><span class="sp"> </span><span style="--tc:#ff5d5d;--r:2deg;--i:7">F</span><span style="--tc:#4dc06b;--r:-2deg;--i:8">Ô</span><span style="--tc:#4d96ff;--r:3deg;--i:9">N</span><span style="--tc:#b983ff;--r:-2deg;--i:10">I</span><span style="--tc:#ff7bac;--r:2deg;--i:11">C</span><span style="--tc:#ff9f43;--r:-3deg;--i:12">O</span>
+      </h1>
+      <p class="tagline">Cada tecla toca o <b>SOM</b> da letra — não o nome! Ouça, repita e aprenda 🎶</p>
+    </div>
+  </header>
+
+  <main id="mainArea">
+    <!-- palco -->
+    <section class="stage" id="stage" aria-live="polite"><div id="stageBox" style="width:100%;display:flex;justify-content:center"></div></section>
+
+    <!-- controles -->
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Modo de áudio">
+        <button type="button" class="seg-btn on" id="modeSom" aria-pressed="true">🔊 Som (fonema)</button>
+        <button type="button" class="seg-btn" id="modeNome" aria-pressed="false">🔤 Nome da letra</button>
+      </div>
+      <button type="button" class="btn btn-hunt" id="btnHunt">🎯 Caça-Sons</button>
+      <div class="stars" id="stars" hidden aria-label="Estrelas conquistadas"></div>
+    </div>
+
+    <!-- teclado -->
+    <section class="keyboard" id="kb" aria-label="Teclado de letras"></section>
+
+    <!-- alternância de modo de visualização -->
+    <div class="seg view-row" role="group" aria-label="Modo de visualização" style="margin:22px auto 0;justify-content:center;display:flex">
+      <button type="button" class="seg-btn on" id="viewAlfabeto" data-view="alfabeto" aria-pressed="true">⌨️ Alfabeto</button>
+      <button type="button" class="seg-btn" id="viewFonemas" data-view="fonemas" aria-pressed="false">🎯 31 Fonemas</button>
+      <button type="button" class="seg-btn" id="viewSilabas" data-view="silabas" aria-pressed="false">🧩 Sílabas</button>
+    </div>
+
+    <!-- sub-modo do modo sílabas -->
+    <div class="seg sil-row" role="group" aria-label="Modo de sílabas" id="silabaSubSeg" hidden style="margin:10px auto 0;justify-content:center;display:flex">
+      <button type="button" class="seg-btn on" id="silVer" aria-pressed="true">👀 Ver sílabas</button>
+      <button type="button" class="seg-btn" id="silCostura" aria-pressed="false">🧩 Costurando sílabas</button>
+    </div>
+
+    <!-- recado para adultos -->
+    <footer class="adult">
+      <p>👩‍🏫 <b>Para educadores:</b> o teclado apresenta o <b>fonema</b> de cada letra (base do método fônico). Sons contínuos são esticados (ffff, mmmm, ssss…) e as plosivas (B, C, D, G, K, P, Q, T) saem bem "curtinhas", com apoio mínimo de vogal — como se modela em sala. O H é trabalhado como letra silenciosa. Sugestão: a criança aperta, repete o som e procura na sala algo que comece com ele.</p>
+      <p class="fine">🔈 As vozes vêm do próprio aparelho (Web Speech API, pt-BR) — Chrome e Edge têm as melhores. Dica de ouro: use "Som" para brincar e "Nome da letra" só para comparar.</p>
+      <p class="fine" id="voicePickerWrap" style="margin-top:8px"></p>
+    </footer>
+  </main>
+</div>
+
+<!-- vitória -->
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Fim de jogo">
+  <div class="ov-card">
+    <div class="ov-emoji">🏆</div>
+    <h2>Uau! Você conseguiu!</h2>
+    <p>5 estrelas de ouro! Seus ouvidos estão afiadíssimos! 👂✨</p>
+    <div class="ov-btns">
+      <button type="button" class="btn btn-hunt" id="btnAgain">🎯 Jogar de novo</button>
+      <button type="button" class="btn" id="btnFree">⌨️ Teclado livre</button>
+    </div>
+  </div>
+</div>
+
+<noscript><p style="text-align:center;padding:20px;font-weight:800">Este brinquedo precisa de JavaScript ligado. 🙏</p></noscript>
+
+<script src="script.js"></script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      // falha silenciosa: o app continua funcionando normalmente online, só sem cache offline
+    });
+  });
+}
+</script>
+</body>
+</html>
